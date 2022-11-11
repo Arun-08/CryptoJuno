@@ -2,4 +2,10 @@
     <string name="app_name">Crypto Juno</string>
     <string name="empty_state">Empty State</string>
     <string name="value_state">Value State</string>
+    <string name="deposit">Deposit</string>
+    <string name="Buy">Buy</string>
+    <string name="your_crypto_holdings">Your Crypto Holdings</string>
+    <string name="view_all">View All</string>
+    <string name="recent_transaction">Recent Transactions</string>
+    <string name="current_prices">Current Prices</string>
 </resources>
