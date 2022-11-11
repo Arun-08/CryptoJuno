@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Crypto Juno</string>
+    <string name="empty_state">Empty State</string>
+    <string name="value_state">Value State</string>
+</resources>
