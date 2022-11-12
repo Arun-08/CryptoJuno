@@ -13,7 +13,7 @@ import com.arun.cryptojuno.utils.ImageLoader
 
 class CurrentPriceAdapter(private val pricesList : ArrayList<CryptoPrices>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.current_prices,parent)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.current_prices,parent,false)
         return PricesViewHolder(view)
     }
 
@@ -38,7 +38,7 @@ class CurrentPriceAdapter(private val pricesList : ArrayList<CryptoPrices>) : Re
                 parent: ViewGroup,
                 viewType: Int
             ): RecyclerView.ViewHolder {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.current_prices_item,parent)
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.current_prices_item,parent,false)
                 return PriceItemViewHolder(view)
             }
 

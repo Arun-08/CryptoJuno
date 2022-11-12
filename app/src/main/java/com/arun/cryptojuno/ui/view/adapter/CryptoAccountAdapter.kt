@@ -3,15 +3,17 @@ package com.arun.cryptojuno.ui.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arun.cryptojuno.R
 import com.arun.cryptojuno.data.model.CryptoBalance
 import com.arun.cryptojuno.databinding.CryptoAccountBinding
+import com.bumptech.glide.Glide
 
 class CryptoAccountAdapter(private val cryptoAccount : CryptoBalance, private val pageState : Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.crypto_account,parent)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.crypto_account,parent,false)
         return AccountViewHolder(view)
     }
 
@@ -24,7 +26,7 @@ class CryptoAccountAdapter(private val cryptoAccount : CryptoBalance, private va
 
     inner class AccountViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val binding : CryptoAccountBinding = CryptoAccountBinding.bind(view)
+        private val binding : CryptoAccountBinding = DataBindingUtil.bind(view)!!
 
         fun setDetails(){
             binding.apply {
@@ -32,15 +34,13 @@ class CryptoAccountAdapter(private val cryptoAccount : CryptoBalance, private va
                 tvCryptos.text = cryptoAccount.subTitle
                 tvCurrentUsd.text =  cryptoAccount.currentBalInUsd
             }
-            binding.tvDeposit.setOnClickListener {
-
-            }
+            Glide.with(binding.root.context).load(R.mipmap.ic_launcher).into(binding.ivLogo)
             if(pageState == 0){
-                binding.llEmptyState.visibility = View.VISIBLE
-                binding.tvDeposit.visibility = View.GONE
-            } else {
-                binding.llEmptyState.visibility = View.GONE
+                binding.llValueState.visibility = View.GONE
                 binding.tvDeposit.visibility = View.VISIBLE
+            } else {
+                binding.llValueState.visibility = View.VISIBLE
+                binding.tvDeposit.visibility = View.GONE
             }
 
         }

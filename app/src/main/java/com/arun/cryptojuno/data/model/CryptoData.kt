@@ -38,7 +38,7 @@ data class CryptoPrices(
     var logo : String,
     @SerializedName("title")
     var title : String,
-    @SerializedName("current_bal_in_usd")
+    @SerializedName("current_price_in_usd")
     var currentBalInUsd : String
 )
 

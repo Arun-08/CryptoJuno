@@ -3,6 +3,7 @@ package com.arun.cryptojuno.ui.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arun.cryptojuno.R
@@ -11,10 +12,10 @@ import com.arun.cryptojuno.databinding.RecentTransactionBinding
 import com.arun.cryptojuno.databinding.RecentTransactionItemBinding
 import com.arun.cryptojuno.utils.ImageLoader
 
-class RecentTransactionAdapter(private val transactionList : ArrayList<AllTransaction>, private val pageState : Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class RecentTransactionAdapter(private var transactionList : ArrayList<AllTransaction>, private val pageState : Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recent_transaction_item,parent)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.recent_transaction,parent,false)
         return TransactionHolder(view)
     }
 
@@ -22,11 +23,11 @@ class RecentTransactionAdapter(private val transactionList : ArrayList<AllTransa
         (holder as TransactionHolder).setDetails()
     }
 
-    override fun getItemCount(): Int = 1
+    override fun getItemCount(): Int = if(transactionList.size>0) 1 else 0
 
     private inner class TransactionHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val binding = RecentTransactionBinding.bind(view)
+        private val binding : RecentTransactionBinding= DataBindingUtil.bind(view)!!
 
         fun setDetails(){
             val itemAdapter = TransactionItemAdapter()
@@ -39,7 +40,7 @@ class RecentTransactionAdapter(private val transactionList : ArrayList<AllTransa
                 parent: ViewGroup,
                 viewType: Int
             ): RecyclerView.ViewHolder {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.recent_transaction_item,parent)
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.recent_transaction_item,parent,false)
                 return TransactionItemHolder(view)
             }
 
@@ -50,7 +51,7 @@ class RecentTransactionAdapter(private val transactionList : ArrayList<AllTransa
             override fun getItemCount(): Int = transactionList.size
 
             private inner class TransactionItemHolder(view: View) : RecyclerView.ViewHolder(view) {
-                private val itemBinding = RecentTransactionItemBinding.bind(view)
+                private val itemBinding : RecentTransactionItemBinding = DataBindingUtil.bind(view)!!
 
                 fun setItemDetails(data: AllTransaction){
                     itemBinding.apply {
@@ -64,10 +65,11 @@ class RecentTransactionAdapter(private val transactionList : ArrayList<AllTransa
             }
 
         }
-
     }
 
-
-
+    fun addTransaction(trans : AllTransaction){
+        transactionList.add(trans)
+        notifyDataSetChanged()
+    }
 
 }
